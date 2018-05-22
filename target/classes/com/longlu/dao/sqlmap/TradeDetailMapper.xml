@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.TradeDetailMapper">
+
+	<sql id="Base_Column_List">
+	    id, buyer_area, num, type, tid, feedback, price, total_fee, payment, buyer_message, 
+	    created, pay_time, refund_state, status, post_fee, pic_thumb_path, receiver_city, 
+	    refunded_fee, num_iid, title, receiver_state, receiver_zip, receiver_name, pay_type, 
+	    receiver_district, pic_path, receiver_mobile, sign_time, receiver_address, outer_tid, 
+	    shipping_type, shopName, shopId
+	  </sql>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tradedetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.TradeDetail">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tradedetail (buyer_area, num, type, 
+      tid, feedback, price, 
+      total_fee, payment, buyer_message, 
+      created, pay_time, refund_state, 
+      status, post_fee, pic_thumb_path, 
+      receiver_city, refunded_fee, num_iid, 
+      title, receiver_state, receiver_zip, 
+      receiver_name, pay_type, receiver_district, 
+      pic_path, receiver_mobile, sign_time, 
+      receiver_address, outer_tid, shipping_type, 
+      shopName, shopId)
+    values (#{buyer_area,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=VARCHAR}, #{feedback,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, 
+      #{total_fee,jdbcType=DOUBLE}, #{payment,jdbcType=DOUBLE}, #{buyer_message,jdbcType=VARCHAR}, 
+      #{created,jdbcType=VARCHAR}, #{pay_time,jdbcType=VARCHAR}, #{refund_state,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{post_fee,jdbcType=DOUBLE}, #{pic_thumb_path,jdbcType=VARCHAR}, 
+      #{receiver_city,jdbcType=VARCHAR}, #{refunded_fee,jdbcType=DOUBLE}, #{num_iid,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{receiver_state,jdbcType=VARCHAR}, #{receiver_zip,jdbcType=VARCHAR}, 
+      #{receiver_name,jdbcType=VARCHAR}, #{pay_type,jdbcType=VARCHAR}, #{receiver_district,jdbcType=VARCHAR}, 
+      #{pic_path,jdbcType=VARCHAR}, #{receiver_mobile,jdbcType=VARCHAR}, #{sign_time,jdbcType=VARCHAR}, 
+      #{receiver_address,jdbcType=VARCHAR}, #{outer_tid,jdbcType=VARCHAR}, #{shipping_type,jdbcType=VARCHAR}, 
+      #{shopName,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.TradeDetail">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tradedetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buyer_area != null">
+        buyer_area,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="feedback != null">
+        feedback,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="total_fee != null">
+        total_fee,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="buyer_message != null">
+        buyer_message,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="pay_time != null">
+        pay_time,
+      </if>
+      <if test="refund_state != null">
+        refund_state,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="post_fee != null">
+        post_fee,
+      </if>
+      <if test="pic_thumb_path != null">
+        pic_thumb_path,
+      </if>
+      <if test="receiver_city != null">
+        receiver_city,
+      </if>
+      <if test="refunded_fee != null">
+        refunded_fee,
+      </if>
+      <if test="num_iid != null">
+        num_iid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="receiver_state != null">
+        receiver_state,
+      </if>
+      <if test="receiver_zip != null">
+        receiver_zip,
+      </if>
+      <if test="receiver_name != null">
+        receiver_name,
+      </if>
+      <if test="pay_type != null">
+        pay_type,
+      </if>
+      <if test="receiver_district != null">
+        receiver_district,
+      </if>
+      <if test="pic_path != null">
+        pic_path,
+      </if>
+      <if test="receiver_mobile != null">
+        receiver_mobile,
+      </if>
+      <if test="sign_time != null">
+        sign_time,
+      </if>
+      <if test="receiver_address != null">
+        receiver_address,
+      </if>
+      <if test="outer_tid != null">
+        outer_tid,
+      </if>
+      <if test="shipping_type != null">
+        shipping_type,
+      </if>
+      <if test="shopName != null">
+        shopName,
+      </if>
+      <if test="shopId != null">
+        shopId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buyer_area != null">
+        #{buyer_area,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="feedback != null">
+        #{feedback,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="total_fee != null">
+        #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=DOUBLE},
+      </if>
+      <if test="buyer_message != null">
+        #{buyer_message,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_time != null">
+        #{pay_time,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_state != null">
+        #{refund_state,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="post_fee != null">
+        #{post_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="pic_thumb_path != null">
+        #{pic_thumb_path,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_city != null">
+        #{receiver_city,jdbcType=VARCHAR},
+      </if>
+      <if test="refunded_fee != null">
+        #{refunded_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="num_iid != null">
+        #{num_iid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_state != null">
+        #{receiver_state,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_zip != null">
+        #{receiver_zip,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_name != null">
+        #{receiver_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_type != null">
+        #{pay_type,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_district != null">
+        #{receiver_district,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_path != null">
+        #{pic_path,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_mobile != null">
+        #{receiver_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sign_time != null">
+        #{sign_time,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_address != null">
+        #{receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="outer_tid != null">
+        #{outer_tid,jdbcType=VARCHAR},
+      </if>
+      <if test="shipping_type != null">
+        #{shipping_type,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.TradeDetail">
+    update tradedetail
+    <set>
+      <if test="buyer_area != null">
+        buyer_area = #{buyer_area,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="feedback != null">
+        feedback = #{feedback,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="total_fee != null">
+        total_fee = #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=DOUBLE},
+      </if>
+      <if test="buyer_message != null">
+        buyer_message = #{buyer_message,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_time != null">
+        pay_time = #{pay_time,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_state != null">
+        refund_state = #{refund_state,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="post_fee != null">
+        post_fee = #{post_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="pic_thumb_path != null">
+        pic_thumb_path = #{pic_thumb_path,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_city != null">
+        receiver_city = #{receiver_city,jdbcType=VARCHAR},
+      </if>
+      <if test="refunded_fee != null">
+        refunded_fee = #{refunded_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="num_iid != null">
+        num_iid = #{num_iid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_state != null">
+        receiver_state = #{receiver_state,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_zip != null">
+        receiver_zip = #{receiver_zip,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_name != null">
+        receiver_name = #{receiver_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_type != null">
+        pay_type = #{pay_type,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_district != null">
+        receiver_district = #{receiver_district,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_path != null">
+        pic_path = #{pic_path,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_mobile != null">
+        receiver_mobile = #{receiver_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="sign_time != null">
+        sign_time = #{sign_time,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_address != null">
+        receiver_address = #{receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="outer_tid != null">
+        outer_tid = #{outer_tid,jdbcType=VARCHAR},
+      </if>
+      <if test="shipping_type != null">
+        shipping_type = #{shipping_type,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        shopName = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        shopId = #{shopId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.TradeDetail">
+    update tradedetail
+    set buyer_area = #{buyer_area,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=VARCHAR},
+      feedback = #{feedback,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      total_fee = #{total_fee,jdbcType=DOUBLE},
+      payment = #{payment,jdbcType=DOUBLE},
+      buyer_message = #{buyer_message,jdbcType=VARCHAR},
+      created = #{created,jdbcType=VARCHAR},
+      pay_time = #{pay_time,jdbcType=VARCHAR},
+      refund_state = #{refund_state,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      post_fee = #{post_fee,jdbcType=DOUBLE},
+      pic_thumb_path = #{pic_thumb_path,jdbcType=VARCHAR},
+      receiver_city = #{receiver_city,jdbcType=VARCHAR},
+      refunded_fee = #{refunded_fee,jdbcType=DOUBLE},
+      num_iid = #{num_iid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      receiver_state = #{receiver_state,jdbcType=VARCHAR},
+      receiver_zip = #{receiver_zip,jdbcType=VARCHAR},
+      receiver_name = #{receiver_name,jdbcType=VARCHAR},
+      pay_type = #{pay_type,jdbcType=VARCHAR},
+      receiver_district = #{receiver_district,jdbcType=VARCHAR},
+      pic_path = #{pic_path,jdbcType=VARCHAR},
+      receiver_mobile = #{receiver_mobile,jdbcType=VARCHAR},
+      sign_time = #{sign_time,jdbcType=VARCHAR},
+      receiver_address = #{receiver_address,jdbcType=VARCHAR},
+      outer_tid = #{outer_tid,jdbcType=VARCHAR},
+      shipping_type = #{shipping_type,jdbcType=VARCHAR},
+      shopName = #{shopName,jdbcType=VARCHAR},
+      shopId = #{shopId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+	
+	<!-- 自定义查询结果 -->
+	<select id="selectByTradeDetail" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tradedetail
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<!-- 自定义返回结果 -->
+	<resultMap id="BaseResultMap" type="com.longlu.pojo.TradeDetail">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="buyer_area" jdbcType="VARCHAR" property="buyer_area" />
+		<result column="num" jdbcType="INTEGER" property="num" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="tid" jdbcType="VARCHAR" property="tid" />
+		<result column="feedback" jdbcType="INTEGER" property="feedback" />
+		<result column="price" jdbcType="DOUBLE" property="price" />
+		<result column="total_fee" jdbcType="DOUBLE" property="total_fee" />
+		<result column="payment" jdbcType="DOUBLE" property="payment" />
+		<result column="buyer_message" jdbcType="VARCHAR" property="buyer_message" />
+		<result column="created" jdbcType="VARCHAR" property="created" />
+		<result column="pay_time" jdbcType="VARCHAR" property="pay_time" />
+		<result column="refund_state" jdbcType="VARCHAR" property="refund_state" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="post_fee" jdbcType="DOUBLE" property="post_fee" />
+		<result column="pic_thumb_path" jdbcType="VARCHAR" property="pic_thumb_path" />
+		<result column="receiver_city" jdbcType="VARCHAR" property="receiver_city" />
+		<result column="refunded_fee" jdbcType="DOUBLE" property="refunded_fee" />
+		<result column="num_iid" jdbcType="VARCHAR" property="num_iid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="receiver_state" jdbcType="VARCHAR" property="receiver_state" />
+		<result column="receiver_zip" jdbcType="VARCHAR" property="receiver_zip" />
+		<result column="receiver_name" jdbcType="VARCHAR" property="receiver_name" />
+		<result column="pay_type" jdbcType="VARCHAR" property="pay_type" />
+		<result column="receiver_district" jdbcType="VARCHAR" property="receiver_district" />
+		<result column="pic_path" jdbcType="VARCHAR" property="pic_path" />
+		<result column="receiver_mobile" jdbcType="VARCHAR" property="receiver_mobile" />
+		<result column="sign_time" jdbcType="VARCHAR" property="sign_time" />
+		<result column="receiver_address" jdbcType="VARCHAR" property="receiver_address" />
+		<result column="outer_tid" jdbcType="VARCHAR" property="outer_tid" />
+		<result column="shipping_type" jdbcType="VARCHAR" property="shipping_type" />
+		<result column="shopName" jdbcType="VARCHAR" property="shopName" />
+		<result column="shopId" jdbcType="VARCHAR" property="shopId" />
+		<collection property="orders" column="tid" select="selectByTradeOrder"/>
+	</resultMap>
+	
+	<resultMap id="BaseResultMap2" type="com.longlu.pojo.TradeDetail">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="buyer_area" jdbcType="VARCHAR" property="buyer_area" />
+		<result column="num" jdbcType="INTEGER" property="num" />
+		<result column="type" jdbcType="VARCHAR" property="type" />
+		<result column="tid" jdbcType="VARCHAR" property="tid" />
+		<result column="feedback" jdbcType="INTEGER" property="feedback" />
+		<result column="price" jdbcType="DOUBLE" property="price" />
+		<result column="total_fee" jdbcType="DOUBLE" property="total_fee" />
+		<result column="payment" jdbcType="DOUBLE" property="payment" />
+		<result column="buyer_message" jdbcType="VARCHAR" property="buyer_message" />
+		<result column="created" jdbcType="VARCHAR" property="created" />
+		<result column="pay_time" jdbcType="VARCHAR" property="pay_time" />
+		<result column="refund_state" jdbcType="VARCHAR" property="refund_state" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="post_fee" jdbcType="DOUBLE" property="post_fee" />
+		<result column="pic_thumb_path" jdbcType="VARCHAR" property="pic_thumb_path" />
+		<result column="receiver_city" jdbcType="VARCHAR" property="receiver_city" />
+		<result column="refunded_fee" jdbcType="DOUBLE" property="refunded_fee" />
+		<result column="num_iid" jdbcType="VARCHAR" property="num_iid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="receiver_state" jdbcType="VARCHAR" property="receiver_state" />
+		<result column="receiver_zip" jdbcType="VARCHAR" property="receiver_zip" />
+		<result column="receiver_name" jdbcType="VARCHAR" property="receiver_name" />
+		<result column="pay_type" jdbcType="VARCHAR" property="pay_type" />
+		<result column="receiver_district" jdbcType="VARCHAR" property="receiver_district" />
+		<result column="pic_path" jdbcType="VARCHAR" property="pic_path" />
+		<result column="receiver_mobile" jdbcType="VARCHAR" property="receiver_mobile" />
+		<result column="sign_time" jdbcType="VARCHAR" property="sign_time" />
+		<result column="receiver_address" jdbcType="VARCHAR" property="receiver_address" />
+		<result column="outer_tid" jdbcType="VARCHAR" property="outer_tid" />
+		<result column="shipping_type" jdbcType="VARCHAR" property="shipping_type" />
+		<result column="shopName" jdbcType="VARCHAR" property="shopName" />
+		<result column="shopId" jdbcType="VARCHAR" property="shopId" />
+	</resultMap>
+	
+	<sql id="TradeOrder_Column_List">
+		id, tid, outer_item_id, pic_thumb_path, num, refunded_fee, num_iid, oid,
+		title, fenxiao_payment,
+		discount_fee, price, fenxiao_price, total_fee, payment, outer_sku_id,
+		sku_unique_code,
+		sku_id, sku_properties_name, pic_path, item_refund_state, state_str,
+		allow_send,
+		seller_nick, supplierName,goodsNumber, expressCompany, expressNumber, orderReview,
+		refundReview,payTime,payAddress,bz,emailStatus,cost,shopName,shopId
+	</sql>
+	
+	<select id="selectByTradeOrder" parameterType="java.lang.String" resultType="com.longlu.pojo.TradeOrder">
+		select
+		<include refid="TradeOrder_Column_List" />
+		from tradeorder
+		where tid = #{tid}
+	</select>
+	
+	<!-- 根据tid查询tradeDetail集合 -->
+	<select id="selectTradeDetailByTid" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tradedetail
+		where tid = #{tid}
+	</select>
+	
+	<!-- 根据条件查询tradeDetail集合 -->
+	<select id="selectTradeDetailBySelective" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tradedetail
+		where 1=1
+		<if test="tid != null and tid!=''">
+			and tid = #{tid}
+		</if>
+		<if test="status != null and status!=''">
+			and status = #{status}
+		</if>
+		<if test="payTimeStart != null and payTimeStart!=''">
+			and pay_time >= #{payTimeStart}
+		</if>
+		<if test="payTimeEnd != null and payTimeEnd!=''">
+			and pay_time <![CDATA[<=]]> date_format(#{payTimeEnd},'%Y-%m-%d 23:59:59')
+		</if>
+		<if test="shopId != null and shopId!=''">
+			and shopId = #{shopId}
+		</if>
+		order by shopId asc,pay_time desc
+	</select>
+	
+	<!-- 根据条件查询tradeDetail集合  财务，仓库使用 -->
+	<select id="selectTradeDetailByReview" parameterType="hashMap" resultMap="BaseResultMap2">
+		select
+		<include refid="Base_Column_List" />
+		from tradedetail
+		where 1=1
+		<if test="tid != null and tid!=''">
+			and tid = #{tid}
+		</if>
+		<if test="receiver_name != null and receiver_name!=''">
+			and (receiver_name = #{receiver_name} or receiver_mobile = #{receiver_name})
+		</if>
+		<if test="receiver_mobile != null and receiver_mobile!=''">
+			and (receiver_name = #{receiver_mobile} or receiver_mobile = #{receiver_mobile})
+		</if>
+		<if test="status != null and status!=''">
+			and status = #{status}
+		</if>
+		<if test="payTimeStart != null and payTimeStart!=''">
+			and pay_time >= #{payTimeStart}
+		</if>
+		<if test="payTimeEnd != null and payTimeEnd!=''">
+			and pay_time <![CDATA[<=]]> date_format(#{payTimeEnd},'%Y-%m-%d 23:59:59')
+		</if>
+		<if test="shopId != null and shopId!=''">
+			and shopId = #{shopId}
+		</if>
+		<choose>
+		    <when test="orderBy != null and orderBy!=''">
+		        order by ${orderBy}
+		    </when>
+		    <otherwise>
+		    	order by shopId asc,pay_time asc
+		    </otherwise>
+		</choose>
+	</select>
+</mapper>

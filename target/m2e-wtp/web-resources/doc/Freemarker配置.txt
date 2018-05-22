@@ -1,0 +1,73 @@
+第一步:
+<!-- Freemarker -->
+<dependency>
+    <groupId>org.freemarker</groupId>
+    <artifactId>freemarker</artifactId>
+    <version>2.3.20</version>
+</dependency>
+<!-- ui.freemarker -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>3.2.4.RELEASE</version>
+</dependency>
+
+第二步:
+freemarker.properties文件，内容如下
+tag_syntax=auto_detect
+template_update_delay=2
+default_encoding=UTF-8
+output_encoding=UTF-8
+locale=zh_CN
+date_format=yyyy-MM-dd
+time_format=HH:mm:ss
+datetime_format=yyyy-MM-dd HH:mm:ss
+
+第三步:
+spring-mvc.xml配置
+<!-- 配置Freemarker屬性文件路徑 -->
+<bean id="freemarkerConfiguration"        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <property name="location" value="classpath:conf/freemarker.properties" />
+</bean>
+<!-- 配置freeMarker模板加載地址 -->
+<bean id="freemarkerConfig"        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <!-- 視圖解析器會在/WEB-INF/ftl/路徑下掃描視圖文件 -->
+    <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+    <property name="freemarkerVariables">
+        <map>
+            <entry key="xml_escape" value-ref="fmXmlEscape" />
+        </map>
+    </property>
+</bean>
+<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+<!-- 配置freeMarker視圖解析器 -->
+<bean id="freemakerViewResolver"        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <property name="viewClass"        value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+    <!-- 掃描路徑內所有以ftl結尾的文件 -->
+    <property name="viewNames">
+        <array>
+            <value>*.ftl</value>
+        </array>
+    </property>
+    <property name="contentType" value="text/html; charset=UTF-8" />
+    <property name="exposeRequestAttributes" value="true" />
+    <property name="exposeSessionAttributes" value="true" />
+    <property name="exposeSpringMacroHelpers" value="true" />
+    <property name="requestContextAttribute" value="request" />
+    <!-- 給視圖解析器配置優先級，你可以給之前jsp視圖解析器的值配為2 -->
+    <property name="order" value="1" />
+</bean>
+
+
+classic_compatible=true              ##如果变量为null,转化为空字符串,比如做比较的时候按照空字符做比较 
+whitespace_stripping=true          ##去掉多余的空格,非常有用 
+##模版更新事件,设置为1秒,正式环境设置为3600秒  
+#template_update_delay=3600 
+template_update_delay=1        ##模版更新时间,这里配置是1秒更新一次,正式环境,模版不会改变,可以将这个值设很大,提高效率.就是被这个参数害死了.老是不更新. 
+locale=zh_CN            ##中国 
+default_encoding=utf-8   ##编码utf8 
+url_escaping_charset=utf-8  ##url编码utf8 
+date_format=yyyy-MM-dd   ##显示日期格式 
+time_format=HH:mm:Ss       ##显示时间格式 
+datetime_format=yyyy-MM-dd  ##显示日期格式 
+number_format=\#0.\#\#\#\#\#  ##数字显示格式hi. 

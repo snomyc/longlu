@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.longlu.pojo.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="authoritysid" jdbcType="VARCHAR" property="authoritysid" />
+    <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, authoritysid, rolename, bz
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.Role">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role (authoritysid, rolename, bz
+      )
+    values (#{authoritysid,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.Role">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authoritysid != null">
+        authoritysid,
+      </if>
+      <if test="rolename != null">
+        rolename,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authoritysid != null">
+        #{authoritysid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.Role">
+    update role
+    <set>
+      <if test="authoritysid != null">
+        authoritysid = #{authoritysid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.Role">
+    update role
+    set authoritysid = #{authoritysid,jdbcType=VARCHAR},
+      rolename = #{rolename,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <!-- 根据条件查询用户列表 -->
+  <select id="selectRoleBySelective" parameterType="hashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where 1=1
+	<if test="rolename != null and rolename!=''">
+		and rolename = #{rolename}
+	</if>
+	
+	<if test="roleids != null">
+		and id in
+		<foreach item="item" index="index" collection="roleids" open="(" separator="," close=")">  
+		  #{item}  
+		</foreach>
+	</if>
+  </select>
+</mapper>

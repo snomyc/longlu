@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库连接jar -->
+    <classPathEntry location="D:\maven\Repositories\mysql\mysql-connector-java\5.1.13\mysql-connector-java-5.1.13.jar" />
+   <!-- targetRuntime 可选项，可填值为MyBatis3，MyBatis3Simple（默认的），Ibatis2Java2，Ibatis2Java5 -->
+   <context id="mysql" targetRuntime="MyBatis3">
+    <!-- 生成的Java文件的编码 -->  
+    <property name="javaFileEncoding" value="UTF-8"/>  
+    <!-- 格式化java代码 -->  
+    <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>  
+    <!-- 格式化XML代码 -->  
+    <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>  
+   
+   <!-- 生成的方法是否需要加注释及时间 -->
+  	<commentGenerator>
+        <property name="suppressDate" value="true"/>
+        <property name="suppressAllComments" value="true" />
+    </commentGenerator>
+    <!-- 连接数据库相关的属性 -->
+    <jdbcConnection connectionURL="jdbc:mysql://localhost/innerbuy" driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+    <javaTypeResolver>
+           <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    <!-- 生成javabean -->
+    <javaModelGenerator targetPackage="com.longlu.pojo" targetProject="innerbuy/src/main/java">
+    	<property name="enableSubPackages" value="true"/>
+    	<property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <!-- 生成sqlxml -->
+    <sqlMapGenerator targetPackage="com.longlu.dao.sqlmap" targetProject="innerbuy/src/main/java">
+    	<property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    <!-- 生成dao -->
+    <javaClientGenerator targetPackage="com.longlu.dao" targetProject="innerbuy/src/main/java" type="XMLMAPPER">
+    	<property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+    <!--schema: tableName:表名  domainObjectName:类名-->
+   <!--  <table tableName="users" domainObjectName="Users" enableCountByExample="false"  enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+          <property name="useActualColumnNames" value="true"/> 
+          insert的时候主键自动增长      
+          <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+    </table>
+    <table tableName="role" domainObjectName="Role" enableCountByExample="false"  enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+          <property name="useActualColumnNames" value="true"/> 
+          insert的时候主键自动增长      
+          <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+    </table>
+    <table tableName="department" domainObjectName="Department" enableCountByExample="false"  enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+          <property name="useActualColumnNames" value="true"/> 
+          insert的时候主键自动增长      
+          <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+    </table> -->
+    <table tableName="ali_order_code" domainObjectName="AliOrderCode" enableCountByExample="false"  enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" >
+          <property name="useActualColumnNames" value="true"/> 
+          <!-- insert的时候主键自动增长 -->      
+          <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+    </table>
+    
+  </context>
+</generatorConfiguration>

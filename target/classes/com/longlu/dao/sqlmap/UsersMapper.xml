@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.longlu.pojo.Users">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="deptid" jdbcType="INTEGER" property="deptid" />
+    <result column="roleid" jdbcType="VARCHAR" property="roleid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="xingming" jdbcType="VARCHAR" property="xingming" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="lastlogin" jdbcType="VARCHAR" property="lastlogin" />
+    <result column="f0" jdbcType="VARCHAR" property="f0" />
+    <result column="f1" jdbcType="VARCHAR" property="f1" />
+    <result column="f2" jdbcType="VARCHAR" property="f2" />
+    <result column="f3" jdbcType="VARCHAR" property="f3" />
+    <result column="f4" jdbcType="VARCHAR" property="f4" />
+    <result column="f5" jdbcType="VARCHAR" property="f5" />
+    <result column="f6" jdbcType="VARCHAR" property="f6" />
+    <result column="f7" jdbcType="VARCHAR" property="f7" />
+    <result column="f8" jdbcType="VARCHAR" property="f8" />
+    <result column="f9" jdbcType="VARCHAR" property="f9" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deptid, roleid, username, password, xingming, sex, email, phone, telphone, position, 
+    lastlogin, f0, f1, f2, f3, f4, f5, f6, f7, f8, f9
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from users
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.Users">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users (deptid, roleid, username, 
+      password, xingming, sex, 
+      email, phone, telphone, 
+      position, lastlogin, f0, 
+      f1, f2, f3, f4, 
+      f5, f6, f7, f8, 
+      f9)
+    values (#{deptid,jdbcType=INTEGER}, #{roleid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{xingming,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{lastlogin,jdbcType=VARCHAR}, #{f0,jdbcType=VARCHAR}, 
+      #{f1,jdbcType=VARCHAR}, #{f2,jdbcType=VARCHAR}, #{f3,jdbcType=VARCHAR}, #{f4,jdbcType=VARCHAR}, 
+      #{f5,jdbcType=VARCHAR}, #{f6,jdbcType=VARCHAR}, #{f7,jdbcType=VARCHAR}, #{f8,jdbcType=VARCHAR}, 
+      #{f9,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.Users">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        deptid,
+      </if>
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="xingming != null">
+        xingming,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="lastlogin != null">
+        lastlogin,
+      </if>
+      <if test="f0 != null">
+        f0,
+      </if>
+      <if test="f1 != null">
+        f1,
+      </if>
+      <if test="f2 != null">
+        f2,
+      </if>
+      <if test="f3 != null">
+        f3,
+      </if>
+      <if test="f4 != null">
+        f4,
+      </if>
+      <if test="f5 != null">
+        f5,
+      </if>
+      <if test="f6 != null">
+        f6,
+      </if>
+      <if test="f7 != null">
+        f7,
+      </if>
+      <if test="f8 != null">
+        f8,
+      </if>
+      <if test="f9 != null">
+        f9,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="xingming != null">
+        #{xingming,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogin != null">
+        #{lastlogin,jdbcType=VARCHAR},
+      </if>
+      <if test="f0 != null">
+        #{f0,jdbcType=VARCHAR},
+      </if>
+      <if test="f1 != null">
+        #{f1,jdbcType=VARCHAR},
+      </if>
+      <if test="f2 != null">
+        #{f2,jdbcType=VARCHAR},
+      </if>
+      <if test="f3 != null">
+        #{f3,jdbcType=VARCHAR},
+      </if>
+      <if test="f4 != null">
+        #{f4,jdbcType=VARCHAR},
+      </if>
+      <if test="f5 != null">
+        #{f5,jdbcType=VARCHAR},
+      </if>
+      <if test="f6 != null">
+        #{f6,jdbcType=VARCHAR},
+      </if>
+      <if test="f7 != null">
+        #{f7,jdbcType=VARCHAR},
+      </if>
+      <if test="f8 != null">
+        #{f8,jdbcType=VARCHAR},
+      </if>
+      <if test="f9 != null">
+        #{f9,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.Users">
+    update users
+    <set>
+      <if test="deptid != null">
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null">
+        roleid = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="xingming != null">
+        xingming = #{xingming,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogin != null">
+        lastlogin = #{lastlogin,jdbcType=VARCHAR},
+      </if>
+      <if test="f0 != null">
+        f0 = #{f0,jdbcType=VARCHAR},
+      </if>
+      <if test="f1 != null">
+        f1 = #{f1,jdbcType=VARCHAR},
+      </if>
+      <if test="f2 != null">
+        f2 = #{f2,jdbcType=VARCHAR},
+      </if>
+      <if test="f3 != null">
+        f3 = #{f3,jdbcType=VARCHAR},
+      </if>
+      <if test="f4 != null">
+        f4 = #{f4,jdbcType=VARCHAR},
+      </if>
+      <if test="f5 != null">
+        f5 = #{f5,jdbcType=VARCHAR},
+      </if>
+      <if test="f6 != null">
+        f6 = #{f6,jdbcType=VARCHAR},
+      </if>
+      <if test="f7 != null">
+        f7 = #{f7,jdbcType=VARCHAR},
+      </if>
+      <if test="f8 != null">
+        f8 = #{f8,jdbcType=VARCHAR},
+      </if>
+      <if test="f9 != null">
+        f9 = #{f9,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.Users">
+    update users
+    set deptid = #{deptid,jdbcType=INTEGER},
+      roleid = #{roleid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      xingming = #{xingming,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      lastlogin = #{lastlogin,jdbcType=VARCHAR},
+      f0 = #{f0,jdbcType=VARCHAR},
+      f1 = #{f1,jdbcType=VARCHAR},
+      f2 = #{f2,jdbcType=VARCHAR},
+      f3 = #{f3,jdbcType=VARCHAR},
+      f4 = #{f4,jdbcType=VARCHAR},
+      f5 = #{f5,jdbcType=VARCHAR},
+      f6 = #{f6,jdbcType=VARCHAR},
+      f7 = #{f7,jdbcType=VARCHAR},
+      f8 = #{f8,jdbcType=VARCHAR},
+      f9 = #{f9,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <sql id="Param_Column_List">
+    u.id, u.deptid, u.roleid, u.username, u.password, u.xingming, u.sex, u.email, u.phone, u.telphone, u.position, 
+    u.lastlogin,u.f0, r.rolename
+  </sql>
+  <!-- 根据条件查询用户列表 -->
+  <select id="selectUsersBySelective" parameterType="hashMap" resultType="hashMap">
+    select 
+    <include refid="Param_Column_List" />
+    from users u left join role r on u.roleid = r.id
+    where 1=1
+	<if test="username != null and username!=''">
+		and username = #{username}
+	</if>
+	<if test="password != null and password!=''">
+		and password = #{password}
+	</if>
+	<if test="f1 != null and f1!=''">
+		and f1 = #{f1}
+	</if>
+	<if test="f0 != null and f0!=''">
+		and f0 like CONCAT('%',#{f0},'%') 
+	</if>
+  </select>
+</mapper>

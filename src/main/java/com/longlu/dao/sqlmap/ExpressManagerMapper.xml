@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.ExpressManagerMapper">
+  <resultMap id="BaseResultMap" type="com.longlu.pojo.ExpressManager">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="ali_company" jdbcType="VARCHAR" property="aliCompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, num, company, ali_company
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express_manager
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from express_manager
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.ExpressManager">
+    insert into express_manager (id, num, company, 
+      ali_company)
+    values (#{id,jdbcType=BIGINT}, #{num,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{aliCompany,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.ExpressManager">
+    insert into express_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="aliCompany != null">
+        ali_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="aliCompany != null">
+        #{aliCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.ExpressManager">
+    update express_manager
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="aliCompany != null">
+        ali_company = #{aliCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.ExpressManager">
+    update express_manager
+    set num = #{num,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      ali_company = #{aliCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <!-- 自定义sql编写 -->
+  <!-- 新增条件查询 -->
+  <select id="selectBySelective" parameterType="hashMap" resultType="hashMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from express_manager order by id asc
+  </select>
+  
+  <select id="selectByAliCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express_manager
+    where ali_company = #{aliCompany,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

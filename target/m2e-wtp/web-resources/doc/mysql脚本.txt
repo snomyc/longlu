@@ -1,0 +1,2 @@
+#新增表字段 供应商字段
+alter table ali_order_code add supplierName varchar(50);

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.AliOrderCodeMapper">
+  <resultMap id="BaseResultMap" type="com.longlu.pojo.AliOrderCode">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="outerCode" jdbcType="VARCHAR" property="outerCode" />
+    <result column="alibabaUrl" jdbcType="VARCHAR" property="alibabaUrl" />
+    <result column="goodsName" jdbcType="VARCHAR" property="goodsName" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="supplierName" jdbcType="VARCHAR" property="supplierName" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, outerCode, alibabaUrl, goodsName, cost, supplierName, bz
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ali_order_code
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ali_order_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.AliOrderCode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ali_order_code (outerCode, alibabaUrl, goodsName, 
+      cost, supplierName, bz
+      )
+    values (#{outerCode,jdbcType=VARCHAR}, #{alibabaUrl,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.AliOrderCode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ali_order_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outerCode != null">
+        outerCode,
+      </if>
+      <if test="alibabaUrl != null">
+        alibabaUrl,
+      </if>
+      <if test="goodsName != null">
+        goodsName,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="supplierName != null">
+        supplierName,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outerCode != null">
+        #{outerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="alibabaUrl != null">
+        #{alibabaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.AliOrderCode">
+    update ali_order_code
+    <set>
+      <if test="outerCode != null">
+        outerCode = #{outerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="alibabaUrl != null">
+        alibabaUrl = #{alibabaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goodsName = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplierName = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.AliOrderCode">
+    update ali_order_code
+    set outerCode = #{outerCode,jdbcType=VARCHAR},
+      alibabaUrl = #{alibabaUrl,jdbcType=VARCHAR},
+      goodsName = #{goodsName,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=VARCHAR},
+      supplierName = #{supplierName,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 新增条件查询 -->
+  <select id="selectBySelective" parameterType="hashMap" resultType="hashMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from ali_order_code
+    where 1=1
+    <if test="outerCode != null and outerCode!=''">
+		and outerCode = #{outerCode}
+	</if>
+	order by id desc
+  </select>
+  
+  <!-- 根据 outerCode条件查询查询-->
+  <select id="selectByOuterCode" parameterType="java.lang.String" resultType="com.longlu.pojo.AliOrderCode">
+    select 
+    	<include refid="Base_Column_List" />
+    from ali_order_code
+    where outerCode = #{outerCode}
+  </select>
+</mapper>

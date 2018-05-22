@@ -1,0 +1,53 @@
+/**
+ * @author yangcan
+ * 定时任务服务类
+ * 第一步:编写任务类(TimeTaskService)
+ * 第二步:配置作业类(spring.xml配置)
+ * <bean id="TimeTaskService"  
+	class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	<property name="targetObject">  
+		<bean class="com.crm.timetask.TimeTaskService" />  
+	</property>  
+	<property name="targetMethod" value="sendTodayOnlineSum" />  执行定时任务方法
+	<property name="concurrent" value="false" /><!-- 作业不并发调度 -->  
+	</bean>
+	
+	第三步：配置作业调度的触发方式（触发器）
+	只支持按照一定频度调用任务:
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+		<property name="jobDetail" ref="TimeTaskService" />  
+		<property name="startDelay" value="0" /><!-- 调度工厂实例化后，经过0秒开始执行调度 -->  
+		<property name="repeatInterval" value="2000" /><!-- 每2秒调度一次 -->  
+	</bean>
+	支持到指定时间运行一次：
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  
+		<property name="jobDetail" ref="TimeTaskService" />  
+		<!—每天12:00运行一次 -->  
+		<property name="cronExpression" value="0 0 12 * * ?" />  
+	</bean>  
+	第四步：配置调度工厂
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+		<property name="triggers">  
+		<list>  
+			<ref bean="simpleTrigger" />
+			<ref bean="cronTrigger" />
+		</list>  
+	</property>  
+	</bean> 
+	
+	//规则
+* 一个cronExpression表达式有至少6个（也可能是7个）由空格分隔的时间元素。从左至右，这些元素的定义如下：
+	1．秒（0–59）
+	2．分钟（0–59）
+	3．小时（0–23）
+	4．月份中的日期（1–31）
+	5．月份（1–12或JAN–DEC）
+	6．星期中的日期（1–7或SUN–SAT）
+	7．年份（1970–2099）
+	秒0-59 , - * /
+	分0-59 , - * /
+	小时0-23 , - * /
+	日1-31 , - * ? / L W C
+	月1-12 or JAN-DEC , - * /
+	周几1-7 or SUN-SAT , - * ? / L C #
+	年(可选字段) empty, 1970-2099 , - * /

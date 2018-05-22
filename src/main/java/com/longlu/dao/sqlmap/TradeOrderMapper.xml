@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longlu.dao.TradeOrderMapper">
+  <resultMap id="BaseResultMap" type="com.longlu.pojo.TradeOrder">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tid" jdbcType="VARCHAR" property="tid" />
+    <result column="outer_item_id" jdbcType="VARCHAR" property="outer_item_id" />
+    <result column="pic_thumb_path" jdbcType="VARCHAR" property="pic_thumb_path" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="refunded_fee" jdbcType="DOUBLE" property="refunded_fee" />
+    <result column="num_iid" jdbcType="VARCHAR" property="num_iid" />
+    <result column="oid" jdbcType="VARCHAR" property="oid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="fenxiao_payment" jdbcType="DOUBLE" property="fenxiao_payment" />
+    <result column="discount_fee" jdbcType="DOUBLE" property="discount_fee" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="fenxiao_price" jdbcType="DOUBLE" property="fenxiao_price" />
+    <result column="total_fee" jdbcType="DOUBLE" property="total_fee" />
+    <result column="payment" jdbcType="DOUBLE" property="payment" />
+    <result column="outer_sku_id" jdbcType="VARCHAR" property="outer_sku_id" />
+    <result column="sku_unique_code" jdbcType="VARCHAR" property="sku_unique_code" />
+    <result column="sku_id" jdbcType="VARCHAR" property="sku_id" />
+    <result column="sku_properties_name" jdbcType="VARCHAR" property="sku_properties_name" />
+    <result column="pic_path" jdbcType="VARCHAR" property="pic_path" />
+    <result column="item_refund_state" jdbcType="VARCHAR" property="item_refund_state" />
+    <result column="state_str" jdbcType="VARCHAR" property="state_str" />
+    <result column="allow_send" jdbcType="INTEGER" property="allow_send" />
+    <result column="seller_nick" jdbcType="VARCHAR" property="seller_nick" />
+    <result column="supplierName" jdbcType="VARCHAR" property="supplierName" />
+    <result column="goodsNumber" jdbcType="VARCHAR" property="goodsNumber" />
+    <result column="expressCompany" jdbcType="VARCHAR" property="expressCompany" />
+    <result column="expressNumber" jdbcType="VARCHAR" property="expressNumber" />
+    <result column="orderReview" jdbcType="INTEGER" property="orderReview" />
+    <result column="refundReview" jdbcType="INTEGER" property="refundReview" />
+    <result column="payTime" jdbcType="VARCHAR" property="payTime" />
+    <result column="payAddress" jdbcType="VARCHAR" property="payAddress" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="emailStatus" jdbcType="INTEGER" property="emailStatus" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="shopName" jdbcType="VARCHAR" property="shopName" />
+    <result column="shopId" jdbcType="VARCHAR" property="shopId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tid, outer_item_id, pic_thumb_path, num, refunded_fee, num_iid, oid, title, fenxiao_payment, 
+    discount_fee, price, fenxiao_price, total_fee, payment, outer_sku_id, sku_unique_code, 
+    sku_id, sku_properties_name, pic_path, item_refund_state, state_str, allow_send, 
+    seller_nick, supplierName, goodsNumber, expressCompany, expressNumber, orderReview, 
+    refundReview, payTime, payAddress, bz, emailStatus, cost, shopName, shopId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tradeorder
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tradeorder
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.longlu.pojo.TradeOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tradeorder (tid, outer_item_id, pic_thumb_path, 
+      num, refunded_fee, num_iid, 
+      oid, title, fenxiao_payment, 
+      discount_fee, price, fenxiao_price, 
+      total_fee, payment, outer_sku_id, 
+      sku_unique_code, sku_id, sku_properties_name, 
+      pic_path, item_refund_state, state_str, 
+      allow_send, seller_nick, supplierName, 
+      goodsNumber, expressCompany, expressNumber, 
+      orderReview, refundReview, payTime, 
+      payAddress, bz, emailStatus, 
+      cost, shopName, shopId
+      )
+    values (#{tid,jdbcType=VARCHAR}, #{outer_item_id,jdbcType=VARCHAR}, #{pic_thumb_path,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{refunded_fee,jdbcType=DOUBLE}, #{num_iid,jdbcType=VARCHAR}, 
+      #{oid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{fenxiao_payment,jdbcType=DOUBLE}, 
+      #{discount_fee,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{fenxiao_price,jdbcType=DOUBLE}, 
+      #{total_fee,jdbcType=DOUBLE}, #{payment,jdbcType=DOUBLE}, #{outer_sku_id,jdbcType=VARCHAR}, 
+      #{sku_unique_code,jdbcType=VARCHAR}, #{sku_id,jdbcType=VARCHAR}, #{sku_properties_name,jdbcType=VARCHAR}, 
+      #{pic_path,jdbcType=VARCHAR}, #{item_refund_state,jdbcType=VARCHAR}, #{state_str,jdbcType=VARCHAR}, 
+      #{allow_send,jdbcType=INTEGER}, #{seller_nick,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
+      #{goodsNumber,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, #{expressNumber,jdbcType=VARCHAR}, 
+      #{orderReview,jdbcType=INTEGER}, #{refundReview,jdbcType=INTEGER}, #{payTime,jdbcType=VARCHAR}, 
+      #{payAddress,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{emailStatus,jdbcType=INTEGER}, 
+      #{cost,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longlu.pojo.TradeOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tradeorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        tid,
+      </if>
+      <if test="outer_item_id != null">
+        outer_item_id,
+      </if>
+      <if test="pic_thumb_path != null">
+        pic_thumb_path,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="refunded_fee != null">
+        refunded_fee,
+      </if>
+      <if test="num_iid != null">
+        num_iid,
+      </if>
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="fenxiao_payment != null">
+        fenxiao_payment,
+      </if>
+      <if test="discount_fee != null">
+        discount_fee,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="fenxiao_price != null">
+        fenxiao_price,
+      </if>
+      <if test="total_fee != null">
+        total_fee,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="outer_sku_id != null">
+        outer_sku_id,
+      </if>
+      <if test="sku_unique_code != null">
+        sku_unique_code,
+      </if>
+      <if test="sku_id != null">
+        sku_id,
+      </if>
+      <if test="sku_properties_name != null">
+        sku_properties_name,
+      </if>
+      <if test="pic_path != null">
+        pic_path,
+      </if>
+      <if test="item_refund_state != null">
+        item_refund_state,
+      </if>
+      <if test="state_str != null">
+        state_str,
+      </if>
+      <if test="allow_send != null">
+        allow_send,
+      </if>
+      <if test="seller_nick != null">
+        seller_nick,
+      </if>
+      <if test="supplierName != null">
+        supplierName,
+      </if>
+      <if test="goodsNumber != null">
+        goodsNumber,
+      </if>
+      <if test="expressCompany != null">
+        expressCompany,
+      </if>
+      <if test="expressNumber != null">
+        expressNumber,
+      </if>
+      <if test="orderReview != null">
+        orderReview,
+      </if>
+      <if test="refundReview != null">
+        refundReview,
+      </if>
+      <if test="payTime != null">
+        payTime,
+      </if>
+      <if test="payAddress != null">
+        payAddress,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+      <if test="emailStatus != null">
+        emailStatus,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="shopName != null">
+        shopName,
+      </if>
+      <if test="shopId != null">
+        shopId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="outer_item_id != null">
+        #{outer_item_id,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_thumb_path != null">
+        #{pic_thumb_path,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="refunded_fee != null">
+        #{refunded_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="num_iid != null">
+        #{num_iid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fenxiao_payment != null">
+        #{fenxiao_payment,jdbcType=DOUBLE},
+      </if>
+      <if test="discount_fee != null">
+        #{discount_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="fenxiao_price != null">
+        #{fenxiao_price,jdbcType=DOUBLE},
+      </if>
+      <if test="total_fee != null">
+        #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=DOUBLE},
+      </if>
+      <if test="outer_sku_id != null">
+        #{outer_sku_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_unique_code != null">
+        #{sku_unique_code,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_id != null">
+        #{sku_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_properties_name != null">
+        #{sku_properties_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_path != null">
+        #{pic_path,jdbcType=VARCHAR},
+      </if>
+      <if test="item_refund_state != null">
+        #{item_refund_state,jdbcType=VARCHAR},
+      </if>
+      <if test="state_str != null">
+        #{state_str,jdbcType=VARCHAR},
+      </if>
+      <if test="allow_send != null">
+        #{allow_send,jdbcType=INTEGER},
+      </if>
+      <if test="seller_nick != null">
+        #{seller_nick,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumber != null">
+        #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null">
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNumber != null">
+        #{expressNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderReview != null">
+        #{orderReview,jdbcType=INTEGER},
+      </if>
+      <if test="refundReview != null">
+        #{refundReview,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payAddress != null">
+        #{payAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null">
+        #{emailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longlu.pojo.TradeOrder">
+    update tradeorder
+    <set>
+      <if test="tid != null">
+        tid = #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="outer_item_id != null">
+        outer_item_id = #{outer_item_id,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_thumb_path != null">
+        pic_thumb_path = #{pic_thumb_path,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="refunded_fee != null">
+        refunded_fee = #{refunded_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="num_iid != null">
+        num_iid = #{num_iid,jdbcType=VARCHAR},
+      </if>
+      <if test="oid != null">
+        oid = #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="fenxiao_payment != null">
+        fenxiao_payment = #{fenxiao_payment,jdbcType=DOUBLE},
+      </if>
+      <if test="discount_fee != null">
+        discount_fee = #{discount_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="fenxiao_price != null">
+        fenxiao_price = #{fenxiao_price,jdbcType=DOUBLE},
+      </if>
+      <if test="total_fee != null">
+        total_fee = #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=DOUBLE},
+      </if>
+      <if test="outer_sku_id != null">
+        outer_sku_id = #{outer_sku_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_unique_code != null">
+        sku_unique_code = #{sku_unique_code,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_id != null">
+        sku_id = #{sku_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sku_properties_name != null">
+        sku_properties_name = #{sku_properties_name,jdbcType=VARCHAR},
+      </if>
+      <if test="pic_path != null">
+        pic_path = #{pic_path,jdbcType=VARCHAR},
+      </if>
+      <if test="item_refund_state != null">
+        item_refund_state = #{item_refund_state,jdbcType=VARCHAR},
+      </if>
+      <if test="state_str != null">
+        state_str = #{state_str,jdbcType=VARCHAR},
+      </if>
+      <if test="allow_send != null">
+        allow_send = #{allow_send,jdbcType=INTEGER},
+      </if>
+      <if test="seller_nick != null">
+        seller_nick = #{seller_nick,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplierName = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumber != null">
+        goodsNumber = #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null">
+        expressCompany = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNumber != null">
+        expressNumber = #{expressNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderReview != null">
+        orderReview = #{orderReview,jdbcType=INTEGER},
+      </if>
+      <if test="refundReview != null">
+        refundReview = #{refundReview,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        payTime = #{payTime,jdbcType=VARCHAR},
+      </if>
+      <if test="payAddress != null">
+        payAddress = #{payAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null">
+        emailStatus = #{emailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        shopName = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null">
+        shopId = #{shopId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longlu.pojo.TradeOrder">
+    update tradeorder
+    set tid = #{tid,jdbcType=VARCHAR},
+      outer_item_id = #{outer_item_id,jdbcType=VARCHAR},
+      pic_thumb_path = #{pic_thumb_path,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      refunded_fee = #{refunded_fee,jdbcType=DOUBLE},
+      num_iid = #{num_iid,jdbcType=VARCHAR},
+      oid = #{oid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      fenxiao_payment = #{fenxiao_payment,jdbcType=DOUBLE},
+      discount_fee = #{discount_fee,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      fenxiao_price = #{fenxiao_price,jdbcType=DOUBLE},
+      total_fee = #{total_fee,jdbcType=DOUBLE},
+      payment = #{payment,jdbcType=DOUBLE},
+      outer_sku_id = #{outer_sku_id,jdbcType=VARCHAR},
+      sku_unique_code = #{sku_unique_code,jdbcType=VARCHAR},
+      sku_id = #{sku_id,jdbcType=VARCHAR},
+      sku_properties_name = #{sku_properties_name,jdbcType=VARCHAR},
+      pic_path = #{pic_path,jdbcType=VARCHAR},
+      item_refund_state = #{item_refund_state,jdbcType=VARCHAR},
+      state_str = #{state_str,jdbcType=VARCHAR},
+      allow_send = #{allow_send,jdbcType=INTEGER},
+      seller_nick = #{seller_nick,jdbcType=VARCHAR},
+      supplierName = #{supplierName,jdbcType=VARCHAR},
+      goodsNumber = #{goodsNumber,jdbcType=VARCHAR},
+      expressCompany = #{expressCompany,jdbcType=VARCHAR},
+      expressNumber = #{expressNumber,jdbcType=VARCHAR},
+      orderReview = #{orderReview,jdbcType=INTEGER},
+      refundReview = #{refundReview,jdbcType=INTEGER},
+      payTime = #{payTime,jdbcType=VARCHAR},
+      payAddress = #{payAddress,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      emailStatus = #{emailStatus,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=VARCHAR},
+      shopName = #{shopName,jdbcType=VARCHAR},
+      shopId = #{shopId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!--自定义sql -->
+  <!-- 根据tid查询TradeOrder集合 -->
+	<select id="selectTradeOrderByTid" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tradeorder
+		where tid = #{tid}
+	</select>
+	
+	<!-- 根据条件查询TradeOrder集合 -->
+	<select id="selectTradeOrderBySelective" parameterType="hashMap" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tradeorder
+		where 1=1
+		<if test="tid != null">
+			and tid = #{tid}
+		</if>
+		<if test="orderReview != null">
+			and orderReview = #{orderReview}
+		</if>
+		<if test="supplierNames != null">
+			and supplierName in
+			<foreach item="item" index="index" collection="supplierNames" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+		</if>
+	</select>
+
+	<update id="updateByTradeOrderSelectMap" parameterType="hashMap">
+		update tradeorder
+	    <set>
+	      <if test="tid != null">
+	        tid = #{tid},
+	      </if>
+	      <if test="outer_item_id != null">
+	        outer_item_id = #{outer_item_id},
+	      </if>
+	      <if test="pic_thumb_path != null">
+	        pic_thumb_path = #{pic_thumb_path},
+	      </if>
+	      <if test="num != null">
+	        num = #{num},
+	      </if>
+	      <if test="refunded_fee != null">
+	        refunded_fee = #{refunded_fee},
+	      </if>
+	      <if test="num_iid != null">
+	        num_iid = #{num_iid},
+	      </if>
+	      <if test="oid != null">
+	        oid = #{oid},
+	      </if>
+	      <if test="title != null">
+	        title = #{title},
+	      </if>
+	      <if test="fenxiao_payment != null">
+	        fenxiao_payment = #{fenxiao_payment},
+	      </if>
+	      <if test="discount_fee != null">
+	        discount_fee = #{discount_fee},
+	      </if>
+	      <if test="price != null">
+	        price = #{price,jdbcType=DOUBLE},
+	      </if>
+	      <if test="fenxiao_price != null">
+	        fenxiao_price = #{fenxiao_price},
+	      </if>
+	      <if test="total_fee != null">
+	        total_fee = #{total_fee},
+	      </if>
+	      <if test="payment != null">
+	        payment = #{payment},
+	      </if>
+	      <if test="outer_sku_id != null">
+	        outer_sku_id = #{outer_sku_id},
+	      </if>
+	      <if test="sku_unique_code != null">
+	        sku_unique_code = #{sku_unique_code},
+	      </if>
+	      <if test="sku_id != null">
+	        sku_id = #{sku_id},
+	      </if>
+	      <if test="sku_properties_name != null">
+	        sku_properties_name = #{sku_properties_name},
+	      </if>
+	      <if test="pic_path != null">
+	        pic_path = #{pic_path},
+	      </if>
+	      <if test="item_refund_state != null">
+	        item_refund_state = #{item_refund_state},
+	      </if>
+	      <if test="state_str != null">
+	        state_str = #{state_str},
+	      </if>
+	      <if test="allow_send != null">
+	        allow_send = #{allow_send},
+	      </if>
+	      <if test="seller_nick != null">
+	        seller_nick = #{seller_nick},
+	      </if>
+	      <if test="supplierName != null">
+	        supplierName = #{supplierName},
+	      </if>
+	      <if test="goodsNumber != null">
+	        goodsNumber = #{goodsNumber},
+	      </if>
+	      <if test="expressCompany != null">
+	        expressCompany = #{expressCompany},
+	      </if>
+	      <if test="expressNumber != null">
+	        expressNumber = #{expressNumber},
+	      </if>
+	      <if test="orderReview != null">
+	        orderReview = #{orderReview},
+	      </if>
+	      <if test="refundReview != null">
+	        refundReview = #{refundReview},
+	      </if>
+	      <if test="payTime != null">
+	        payTime = #{payTime},
+	      </if>
+	      <if test="payAddress != null">
+	        payAddress = #{payAddress},
+	      </if>
+	      <if test="bz != null">
+	        bz = #{bz},
+	      </if>
+	      <if test="emailStatus != null">
+	        emailStatus = #{emailStatus},
+	      </if>
+	      <if test="cost != null">
+	        cost = #{cost},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<!-- 批量更新 -->
+	<update id="batchUpdateByTradeOrderSelectMap" parameterType="hashMap">
+		update tradeorder
+	    <set>
+	      <if test="tid != null">
+	        tid = #{tid},
+	      </if>
+	      <if test="outer_item_id != null">
+	        outer_item_id = #{outer_item_id},
+	      </if>
+	      <if test="pic_thumb_path != null">
+	        pic_thumb_path = #{pic_thumb_path},
+	      </if>
+	      <if test="num != null">
+	        num = #{num},
+	      </if>
+	      <if test="refunded_fee != null">
+	        refunded_fee = #{refunded_fee},
+	      </if>
+	      <if test="num_iid != null">
+	        num_iid = #{num_iid},
+	      </if>
+	      <if test="oid != null">
+	        oid = #{oid},
+	      </if>
+	      <if test="title != null">
+	        title = #{title},
+	      </if>
+	      <if test="fenxiao_payment != null">
+	        fenxiao_payment = #{fenxiao_payment},
+	      </if>
+	      <if test="discount_fee != null">
+	        discount_fee = #{discount_fee},
+	      </if>
+	      <if test="price != null">
+	        price = #{price,jdbcType=DOUBLE},
+	      </if>
+	      <if test="fenxiao_price != null">
+	        fenxiao_price = #{fenxiao_price},
+	      </if>
+	      <if test="total_fee != null">
+	        total_fee = #{total_fee},
+	      </if>
+	      <if test="payment != null">
+	        payment = #{payment},
+	      </if>
+	      <if test="outer_sku_id != null">
+	        outer_sku_id = #{outer_sku_id},
+	      </if>
+	      <if test="sku_unique_code != null">
+	        sku_unique_code = #{sku_unique_code},
+	      </if>
+	      <if test="sku_id != null">
+	        sku_id = #{sku_id},
+	      </if>
+	      <if test="sku_properties_name != null">
+	        sku_properties_name = #{sku_properties_name},
+	      </if>
+	      <if test="pic_path != null">
+	        pic_path = #{pic_path},
+	      </if>
+	      <if test="item_refund_state != null">
+	        item_refund_state = #{item_refund_state},
+	      </if>
+	      <if test="state_str != null">
+	        state_str = #{state_str},
+	      </if>
+	      <if test="allow_send != null">
+	        allow_send = #{allow_send},
+	      </if>
+	      <if test="seller_nick != null">
+	        seller_nick = #{seller_nick},
+	      </if>
+	      <if test="supplierName != null">
+	        supplierName = #{supplierName},
+	      </if>
+	      <if test="goodsNumber != null">
+	        goodsNumber = #{goodsNumber},
+	      </if>
+	      <if test="expressCompany != null">
+	        expressCompany = #{expressCompany},
+	      </if>
+	      <if test="expressNumber != null">
+	        expressNumber = #{expressNumber},
+	      </if>
+	      <if test="orderReview != null">
+	        orderReview = #{orderReview},
+	      </if>
+	      <if test="refundReview != null">
+	        refundReview = #{refundReview},
+	      </if>
+	      <if test="payTime != null">
+	        payTime = #{payTime},
+	      </if>
+	      <if test="payAddress != null">
+	        payAddress = #{payAddress},
+	      </if>
+	      <if test="bz != null">
+	        bz = #{bz},
+	      </if>
+	      <if test="emailStatus != null">
+	        emailStatus = #{emailStatus},
+	      </if>
+	      <if test="cost != null">
+	        cost = #{cost},
+	      </if>
+	    </set>
+	    where id in
+	    	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+	</update>
+
+	<!--获取所有供应商名称 -->
+	<select id="getAllOrderSupplierName" resultType="hashMap">
+		select supplierName from tradeorder GROUP BY supplierName
+	</select>
+	
+	<!-- 根据条件查询TradeOrder集合总数 -->
+	<select id="selectTradeOrderBySelectiveCount" parameterType="hashMap" resultType="java.lang.Long">
+		select COUNT(*) from tradedetail td 
+		RIGHT JOIN tradeorder tr ON td.tid = tr.tid
+		where td.status = 'WAIT_SELLER_SEND_GOODS' 
+		<if test="orderReview != null">
+			and tr.orderReview = #{orderReview}
+		</if>
+		<if test="emailStatus != null">
+			and tr.emailStatus = #{emailStatus}
+		</if>
+		<if test="supplierNames != null">
+			and tr.supplierName in
+			<foreach item="item" index="index" collection="supplierNames" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+		</if>
+	</select>
+	
+	<!-- 根据条件更新TradeOrder集合总数发送邮件状态 -->
+	<update id="updateTradeOrderBySelectiveCount" parameterType="hashMap">
+		update tradeorder
+	    <set>
+	      <if test="emailStatus != null">
+	        emailStatus = #{emailStatus},
+	      </if>
+	    </set>
+	    where 1=1
+	    <if test="tid != null">
+			and tid = #{tid}
+		</if>
+		<if test="orderReview != null">
+			and orderReview = #{orderReview}
+		</if>
+		<if test="supplierNames != null">
+			and supplierName in
+			<foreach item="item" index="index" collection="supplierNames" open="(" separator="," close=")">  
+			  #{item}  
+			</foreach>
+		</if>
+	</update>
+	
+</mapper>
